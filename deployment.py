@@ -5,16 +5,24 @@ from PIL import Image
 import re
 import string
 import nltk
-import spacy
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
+
+# Download necessary NLTK data
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('omw-1.4')
+
+stop_words = set(stopwords.words('english'))
+lemmatizer = WordNetLemmatizer()
 
 with open("svm_model.pkl", "rb") as file:
     model = pickle.load(file)
 
 with open("tfidf_vectorizer.pkl", "rb") as file:
     vectorizer = pickle.load(file)
-
-nltk.download('stopwords')
-stopwords = nltk.corpus.stopwords.words('english')
 
 def clean_text(text):
     text = text.lower()
@@ -24,35 +32,25 @@ def remove_punctuation(text):
     punctuation_free = "".join([i for i in text if i not in string.punctuation])
     return punctuation_free
 
-def tokenization(text):
-    tokens = re.split(' ', text)
-    return tokens
-
-def remove_stopwords(text):
-    output = " ".join(i for i in text if i not in stopwords)
-    return output
-
-def lemmatizer(text):
-    nlp = spacy.load('en_core_web_sm')
-    doc = nlp(text)
-    sent = [token.lemma_ for token in doc if not token.text in set(stopwords)]
-    return ' '.join(sent)
+def preprocess_text(text):
+    # Tokenize the text
+    tokens = word_tokenize(text)
+    # Remove stopwords and apply lemmatization
+    processed = [lemmatizer.lemmatize(word) for word in tokens if word.lower() not in stop_words]
+    return " ".join(processed)
 
 st.title("Sentiment Analysis App")
 st.markdown("By Naram Jyotir Vinay")
 image = Image.open("Sentiment-Analysis1.jpg.webp")
-st.image(image, use_column_width=True)
+st.image(image, use_column_width=True)  # Updated parameter
 
 st.subheader("Enter your text here:")
-user_input = st.text_area("")
+user_input = st.text_area("Input Text", label_visibility="collapsed")  # Updated label
 
 if user_input:
     user_input = clean_text(user_input)
     user_input = remove_punctuation(user_input)
-    user_input = user_input.lower()
-    user_input = tokenization(user_input)
-    user_input = remove_stopwords(user_input)
-    user_input = lemmatizer(user_input)
+    user_input = preprocess_text(user_input)
 
 if st.button("Predict"):
     if user_input:
