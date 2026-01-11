@@ -13,14 +13,14 @@ A machine learning-powered sentiment analysis application that categorizes text 
 ## Tech Stack
 
 - **Machine Learning**: scikit-learn (SVM model)
-- **NLP Processing**: NLTK, spaCy
+- **NLP Processing**: NLTK
 - **Web Framework**: Streamlit
 - **Text Vectorization**: TF-IDF Vectorizer
-- **Python**: 3.x
+- **Python**: 3.12
 
 ## Prerequisites
 
-- Python 3.7 or higher
+- Python 3.12
 - pip package manager
 
 ## Installation
@@ -43,6 +43,8 @@ pip install -r requirements.txt
 ```python
 import nltk
 nltk.download('stopwords')
+nltk.download('wordnet')
+nltk.download('omw-1.4')
 ```
 
 ## Required Files
@@ -75,7 +77,7 @@ The application processes text through the following steps:
 2. **Punctuation Removal**: Strips all punctuation marks
 3. **Tokenization**: Splits text into individual tokens
 4. **Stopword Removal**: Removes common English stopwords
-5. **Lemmatization**: Reduces words to their base form using spaCy
+5. **Lemmatization**: Reduces words to their base form using NLTK
 
 ## Model Details
 
