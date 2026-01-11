@@ -42,7 +42,7 @@ def preprocess_text(text):
 st.title("Sentiment Analysis App")
 st.markdown("By Naram Jyotir Vinay")
 image = Image.open("Sentiment-Analysis1.jpg.webp")
-st.image(image, use_column_width=True)  # Updated parameter
+st.image(image, width=700)  # Updated to use the `width` parameter
 
 st.subheader("Enter your text here:")
 user_input = st.text_area("Input Text", label_visibility="collapsed")  # Updated label
