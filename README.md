@@ -1,5 +1,8 @@
 # Sentiment Analysis App
 
+**Live Demo**: https://sentiment-analysis-nlp-app.streamlit.app/  
+**GitHub Repository**: https://github.com/NJVinay/Sentiment_Analysis
+
 A machine learning-powered sentiment analysis application that categorizes text into positive, negative, or neutral sentiments with 90% precision. Built with Streamlit for an interactive web interface.
 
 ## Features
