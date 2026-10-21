@@ -8,8 +8,12 @@ A machine learning-powered sentiment analysis application that categorizes text 
 
 - **Real-time Sentiment Analysis**: Analyze text sentiment instantly
 - **Three-class Classification**: Categorizes text as Positive, Negative, or Neutral
+- **Confidence Scores**: Each prediction comes with a confidence indicator
+- **Batch Analysis**: Analyze many texts at once — paste one per line or upload a CSV/TXT file
+- **Export Results**: Download single, batch, or history results as CSV or JSON
+- **History Tracking**: All predictions in a session are collected in a History tab
 - **Advanced Text Processing**: Includes cleaning, tokenization, stopword removal, and lemmatization
-- **Interactive UI**: User-friendly Streamlit interface
+- **Interactive UI**: Tabbed Streamlit interface with cached model loading for fast reruns
 - **High Accuracy**: 90% precision using SVM model with TF-IDF vectorization
 
 ## Tech Stack
@@ -18,11 +22,11 @@ A machine learning-powered sentiment analysis application that categorizes text 
 - **NLP Processing**: NLTK
 - **Web Framework**: Streamlit
 - **Text Vectorization**: TF-IDF Vectorizer
-- **Python**: 3.12
+- **Python**: 3.10 or 3.11 (scikit-learn 1.2.2 does not support 3.12+)
 
 ## Prerequisites
 
-- Python 3.12
+- Python 3.10 or 3.11
 - pip package manager
 
 ## Installation
@@ -40,14 +44,7 @@ cd Sentiment_Analysis
 pip install -r requirements.txt
 ```
 
-3. Download required NLTK data:
-
-```python
-import nltk
-nltk.download('stopwords')
-nltk.download('wordnet')
-nltk.download('omw-1.4')
-```
+3. NLTK data (stopwords, punkt, wordnet, omw-1.4) is downloaded automatically on first launch.
 
 ## Required Files
 
@@ -67,9 +64,10 @@ streamlit run deployment.py
 
 2. Open your browser and navigate to the local URL (typically `http://localhost:8501`)
 
-3. Enter your text in the text area
-
-4. Click the "Predict" button to get sentiment analysis results
+3. Use one of the three tabs:
+   - **Single Text**: Enter text and click "Predict" to get the sentiment with a confidence score
+   - **Batch Analysis**: Paste multiple texts (one per line) or upload a CSV/TXT file, then click "Analyze Batch" to get a summary and a results table, downloadable as CSV or JSON
+   - **History**: Review and export every prediction made in the current session
 
 ## Text Processing Pipeline
 
@@ -109,11 +107,8 @@ Sentiment_Analysis/
 ## Future Enhancements
 
 - Support for multiple languages
-- Batch text processing
-- Export results to CSV/JSON
 - Model retraining interface
-- Confidence score display
-- Historical analysis tracking
+- Persistent (cross-session) history storage
 
 ## License
 
